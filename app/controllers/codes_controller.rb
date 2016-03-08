@@ -1,6 +1,8 @@
 class CodesController < ApplicationController
   before_action :set_code, only: [:show, :edit, :update, :destroy]
 
+  require 'open3'
+
   # GET /codes
   # GET /codes.json
   def index
@@ -23,8 +25,10 @@ class CodesController < ApplicationController
 
   # POST /codes
   # POST /codes.json
+  # OPTIMIZE --> RAILS_ROOT may need to be : Rails.root or null
   def create
     @code = Code.new(code_params)
+
 
     respond_to do |format|
       if @code.save
@@ -35,6 +39,50 @@ class CodesController < ApplicationController
         format.json { render json: @code.errors, status: :unprocessable_entity }
       end
     end
+
+
+################################################################################################
+# WORKS FIX INPUT
+#   	pathin = "tmp/binaries/in.txt"
+#	fin = File.open(pathin, "w+") 
+#  	fin.write("#{@code.assembly_source}")
+	
+#	fin.flush
+
+
+#	pathout = "tmp/binaries/out.txt"
+#	fout = File.open(pathout, "w+")
+
+
+
+#    stdin, stdout, stderr = Open3.popen3('bin/masmbin test/masmbin_test/lex.ms tmp/binaries/out.txt')  #The Open3.open3 way gives your access to stdin, stdout and stderr.
+#	fout.flush
+
+########################################################################################################
+
+
+    fileout = Tempfile.new ["out", ".mbin"] , "tmp/binaries"
+    filein = Tempfile.new ["in", ".asm"] , "tmp/binaries"
+    filein.write("#{@code.assembly_source}")
+
+    filein.flush
+
+    `bin/masmbin #{filein.path} #{fileout.path}`
+
+
+	#stdin, stdout, stderr = Open3.popen3('bin/masmbin  test/masmbin_test/lex.ms test/masmbin_test/results.ms ')
+
+	#stdin, stdout, stderr = Open3.popen3('bin/mkdir -p test/masmbin_test/parapono2')  #WORKS 
+	 
+
+    #filein.flush
+    fileout.flush
+
+    @code.binary = fileout.read
+
+    @code.save
+
+    
   end
 
   # PATCH/PUT /codes/1
