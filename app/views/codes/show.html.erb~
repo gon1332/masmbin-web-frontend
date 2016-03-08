@@ -2,12 +2,12 @@
 
 <p>
 	<strong>Name:</strong>
-	<%= @code.name %><br>
-	<strong>Assembly source:</strong>
-	<%= @code.assembly_source %><br>
+  	<%= @code.name %><br>
+  <strong>Assembly source:</strong>
+  <%= @code.assembly_source %><br>
 
-	  <strong>Binary:</strong>
-	  <%= @code.binary %>
+  <strong>Binary:</strong>
+  <%= @code.binary %>
 </p>
 
 <%= link_to 'Edit', edit_code_path(@code) %> |

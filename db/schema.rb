@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 20151210204552) do
 
   create_table "codes", force: :cascade do |t|
     t.text     "assembly_source", limit: 65535
+    t.text     "binary",          limit: 65535
+    t.string   "name",            limit: 255
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end

@@ -69,6 +69,6 @@ class CodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def code_params
-      params.require(:code).permit(:assembly_source)
+      params.require(:code).permit(:assembly_source, :name, :binary)
     end
 end

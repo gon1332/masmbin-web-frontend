@@ -12,8 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :assembly_source %><br>
     <%= f.label :assembly_source %><br>
-    <%= f.text_area :assembly_source %>
+    <%= f.text_area :assembly_source %><br>
   </div>
   <div class="actions">
     <%= f.submit %>
