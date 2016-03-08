@@ -1,3 +1,4 @@
+
 <%= form_for(@code) do |f| %>
   <% if @code.errors.any? %>
     <div id="error_explanation">
@@ -13,11 +14,31 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :assembly_source %><br>
-    <%= f.label :assembly_source %><br>
-    <%= f.text_area :assembly_source %><br>
+    <%= f.text_field :name %><br>
+
+    
+
+    <div  id ="editor" style="height: 500px">
+
+      <%= f.label :assembly_source %><br>
+      
+      <%= f.text_area :assembly_source %>
+
+    </div>
+     
+
   </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/assembly_x86");
+</script>
