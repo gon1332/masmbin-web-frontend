@@ -26,8 +26,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 
-# for static asset 
-gem 'rails_12factor', group: :production
+
 
 # Ace editor
 gem 'ace-rails-ap'
@@ -55,4 +54,10 @@ group :development do
   gem 'spring'
 end
 
+
+# for static asset 
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 
