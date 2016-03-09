@@ -63,6 +63,8 @@ class CodesController < ApplicationController
 
     fileout = Tempfile.new ["out", ".mbin"] , "tmp/binaries"
     filein = Tempfile.new ["in", ".asm"] , "tmp/binaries"
+    filein.unlink
+    fileout.unlink
     filein.write("#{@code.assembly_source}")
 
     filein.flush
@@ -81,6 +83,9 @@ class CodesController < ApplicationController
     @code.binary = fileout.read
 
     @code.save
+
+    filein.close
+    fileout.close
 
     
   end
