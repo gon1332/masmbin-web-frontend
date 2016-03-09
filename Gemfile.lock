@@ -1,7 +1,11 @@
+PATH
+  remote: ./gems/ace-rails-ap-4.0.2
+  specs:
+    ace-rails-ap (4.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    ace-rails-ap (4.0.2)
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
       actionview (= 4.2.4)
@@ -155,7 +159,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ace-rails-ap (= 4.0.2)
+  ace-rails-ap!
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)

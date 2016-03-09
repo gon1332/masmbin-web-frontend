@@ -47,7 +47,8 @@
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/assembly_x86");
+    //editor.getSession().setMode("ace/mode/assembly_x86");
+    editor.getSession().setMode("ace/mode/mips_assembler");
 
 
     var textarea = $('textarea[name="hidden"]').hide();
