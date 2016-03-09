@@ -30,6 +30,31 @@ class CodesController < ApplicationController
     @code = Code.new(code_params)
 
 
+    fileout = Tempfile.new ["out", ".mbin"] , "tmp/binaries"
+    filein = Tempfile.new ["in", ".asm"] , "tmp/binaries"
+    filein.write("#{@code.assembly_source}")
+
+    filein.flush
+
+    `bin/masmbin #{filein.path} #{fileout.path}`
+
+
+  #stdin, stdout, stderr = Open3.popen3('bin/masmbin  test/masmbin_test/lex.ms test/masmbin_test/results.ms ')
+
+  #stdin, stdout, stderr = Open3.popen3('bin/mkdir -p test/masmbin_test/parapono2')  #WORKS 
+   
+
+    #filein.flush
+    fileout.flush
+
+    @code.binary = fileout.read
+
+    #@code.save
+
+    filein.close
+    fileout.close
+
+
     respond_to do |format|
       if @code.save
         format.html { redirect_to @code, notice: 'Code was successfully created.' }
@@ -40,6 +65,8 @@ class CodesController < ApplicationController
       end
     end
 
+
+    
 
 ################################################################################################
 # WORKS FIX INPUT
@@ -61,31 +88,7 @@ class CodesController < ApplicationController
 ########################################################################################################
 
 
-    fileout = Tempfile.new ["out", ".mbin"] , "tmp/binaries"
-    filein = Tempfile.new ["in", ".asm"] , "tmp/binaries"
-    filein.unlink
-    fileout.unlink
-    filein.write("#{@code.assembly_source}")
 
-    filein.flush
-
-    `bin/masmbin #{filein.path} #{fileout.path}`
-
-
-	#stdin, stdout, stderr = Open3.popen3('bin/masmbin  test/masmbin_test/lex.ms test/masmbin_test/results.ms ')
-
-	#stdin, stdout, stderr = Open3.popen3('bin/mkdir -p test/masmbin_test/parapono2')  #WORKS 
-	 
-
-    #filein.flush
-    fileout.flush
-
-    @code.binary = fileout.read
-
-    @code.save
-
-    filein.close
-    fileout.close
 
     
   end
