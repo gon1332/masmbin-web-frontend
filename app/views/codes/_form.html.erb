@@ -16,25 +16,31 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %><br>
 
-    
+  
 
+    <% if true %>
     <!--id ="editor"-->
-    <div  style="height: 500px">
+    <div  style="height: 300px" id ="editor"> </div>
 
-      <%= f.label :assembly_source %><br>
-      
-      <%= f.text_area :assembly_source %>
+    <% end %>
 
-    </div>
-     
+
+
 
   </div>
+
+
+    <textarea name="hidden"> </textarea>
 
 
   <div class="actions">
     <%= f.submit %>
   </div>
+
+
 <% end %>
+
+
 
 
 <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -42,4 +48,26 @@
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/assembly_x86");
+
+
+    var textarea = $('textarea[name="hidden"]').hide();
+    editor.getSession().on('change', function(){
+      textarea.val(editor.getSession().getValue());
+    });
 </script>
+
+
+
+<!--
+<script>
+  var editor = ace.edit("description");
+  editor.setTheme("ace/theme/monokai");
+  editor.getSession().setMode("ace/mode/assembly_x86");
+  var textarea = $('textarea[name="description"]').hide();
+  editor.getSession().setValue(textarea.val());
+  editor.getSession().on('change', function(){
+    textarea.val(editor.getSession().getValue());
+});
+
+</script>
+-->

@@ -29,6 +29,7 @@ class CodesController < ApplicationController
   def create
     @code = Code.new(code_params)
 
+    @code.assembly_source = params[:hidden]
 
     fileout = Tempfile.new ["out", ".mbin"] , "tmp"
     filein = Tempfile.new ["in", ".asm"] , "tmp"
