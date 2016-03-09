@@ -30,8 +30,8 @@ class CodesController < ApplicationController
     @code = Code.new(code_params)
 
 
-    fileout = Tempfile.new ["out", ".mbin"] , "tmp/binaries"
-    filein = Tempfile.new ["in", ".asm"] , "tmp/binaries"
+    fileout = Tempfile.new ["out", ".mbin"] , "test/masmbin_test/binaries"
+    filein = Tempfile.new ["in", ".asm"] , "test/masmbin_test/binaries"
     filein.write("#{@code.assembly_source}")
 
     filein.flush
